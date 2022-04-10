@@ -5,6 +5,10 @@
 #         self.left = None
 #         self.right = None
 
+# - use dfs to find the node p and q
+# - store the path from root to both p and q in separate list
+# - iterate through both list to find the last common node
+
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         pList = []
