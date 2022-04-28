@@ -7,17 +7,17 @@ var isPalindrome = function(s) {
     let right = s.length - 1
     
     while (left < right) {
-        let leftChar = s[left]
-        let rightChar = s[right]
+        const leftChar = s[left]
+        const rightChar = s[right]
         
-        while (left < s.length && !/[0-9a-zA-Z]+/.test(leftChar)) {
+        if (!/[0-9a-zA-Z]+/.test(leftChar)) {
             left++
-            leftChar = s[left] || ''
+            continue
         }
         
-        while (right >= 0 && !/[0-9a-zA-Z]+/.test(rightChar)) {
+        if (!/[0-9a-zA-Z]+/.test(rightChar)) {
             right--
-            rightChar = s[right] || ''
+            continue
         }
         
         if (leftChar.toLowerCase() !== rightChar.toLowerCase()) {
