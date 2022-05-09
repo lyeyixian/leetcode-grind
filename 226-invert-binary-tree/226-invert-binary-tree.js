@@ -15,9 +15,37 @@ var invertTree = function(root) {
         return null
     }
     
-    const leftTree = invertTree(root.left)
-    root.left = invertTree(root.right)
-    root.right = leftTree
+    const queue = []
+    
+    queue.push(root)
+    
+    while (queue.length) {
+        const current = queue.shift()
+        const temp = current.left
+        
+        current.left = current.right
+        current.right = temp
+        
+        if (current.left) {
+            queue.push(current.left)
+        }
+        
+        if (current.right) {
+            queue.push(current.right)
+        }
+    }
     
     return root
 };
+
+// var invertTree = function(root) {
+//     if (!root) {
+//         return null
+//     }
+    
+//     const leftTree = invertTree(root.left)
+//     root.left = invertTree(root.right)
+//     root.right = leftTree
+    
+//     return root
+// };
