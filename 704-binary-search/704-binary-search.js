@@ -8,7 +8,7 @@ var search = function(nums, target) {
     let right = nums.length - 1
 
     while (left <= right) {
-        const mid = Math.floor((left + right) / 2)
+        const mid = Math.floor((left + right) / 2) // take note of int overflow: left - ((right - left) / 2)
         const num = nums[mid]
 
         if (num === target) {
