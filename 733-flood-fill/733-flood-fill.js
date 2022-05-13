@@ -7,22 +7,16 @@
  */
 var floodFill = function(image, sr, sc, newColor) {
     const fixedColor = image[sr][sc]
-    const visited = []
     
-    for (let i = 0; i < image.length; i++) {
-        visited[i] = []
-        
-        for (let j = 0; j < image[0].length; j++) {
-            visited[i][j] = false
-        }
+    if (image[sr][sc] === newColor) {
+        return image
     }
     
     function fill(row, col) {
-        if (row < 0 || col < 0 || row >= image.length || col >= image[0].length || image[row][col] !== fixedColor || visited[row][col]) {
+        if (row < 0 || col < 0 || row >= image.length || col >= image[0].length || image[row][col] !== fixedColor) {
             return
         }
         
-        visited[row][col] = true
         image[row][col] = newColor
         
         fill(row + 1, col)
