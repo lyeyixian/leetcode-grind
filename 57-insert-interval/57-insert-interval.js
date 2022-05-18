@@ -6,8 +6,8 @@
 var insert = function(intervals, newInterval) {    
     const res = []
     
-    while (intervals.length) {
-        const interval = intervals.shift()
+    for (let i = 0; i < intervals.length; i++) {
+        const interval = intervals[i]
         const left = interval[0]
         const right = interval[1]
         const newLeft = newInterval[0]
@@ -17,8 +17,7 @@ var insert = function(intervals, newInterval) {
             res.push(interval)
         } else if (newRight < left) {
             res.push(newInterval)
-            res.push(interval)
-            res.push(...intervals)
+            res.push(...intervals.slice(i))
             
             return res
         } else {
