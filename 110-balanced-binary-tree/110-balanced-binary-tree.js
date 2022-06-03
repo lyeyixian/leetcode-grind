@@ -27,10 +27,6 @@ function dfs(node) {
     
     return {
         isBalanced: left.isBalanced && right.isBalanced && Math.abs(left.height - right.height) <= 1,
-        height: calculateHeight(left.height, right.height)
+        height: Math.max(left.height, right.height) + 1
     }
-}
-
-function calculateHeight(left, right) {
-    return Math.max(left, right) + 1
 }
