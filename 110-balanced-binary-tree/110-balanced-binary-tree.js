@@ -23,29 +23,14 @@ function dfs(node) {
     }
     
     const left = dfs(node.left)
-    
-    if (!left.isBalanced) {
-        return {
-            isBalanced: false
-        }
-    }
-    
     const right = dfs(node.right)
     
-    if (!right.isBalanced) {
-        return {
-            isBalanced: false
-        }
-    }
-    
-    if (Math.abs(left.height - right.height) > 1) {
-        return {
-            isBalanced: false
-        }
-    }
-    
     return {
-        isBalanced: true,
-        height: Math.max(left.height, right.height) + 1
+        isBalanced: left.isBalanced && right.isBalanced && Math.abs(left.height - right.height) <= 1,
+        height: calculateHeight(left.height, right.height)
     }
+}
+
+function calculateHeight(left, right) {
+    return Math.max(left, right) + 1
 }
