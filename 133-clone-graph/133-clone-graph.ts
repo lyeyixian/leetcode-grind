@@ -22,14 +22,10 @@ function cloneGraph(node: Node | null): Node | null {
     
     while (queue.length) {
         const current = queue.shift()
-        const currentCopy = hashTable.get(current)
-            ? hashTable.get(current)
-            : new Node(current.val)
+        const currentCopy = getCopy(current, hashTable)
         
         for (const neighbor of current.neighbors) {
-            const neighborCopy = hashTable.get(neighbor)
-                ? hashTable.get(neighbor)
-                : new Node(neighbor.val)
+            const neighborCopy = getCopy(neighbor, hashTable)
 
             currentCopy.neighbors.push(neighborCopy)
             
@@ -45,3 +41,9 @@ function cloneGraph(node: Node | null): Node | null {
     
     return hashTable.get(node)
 };
+
+function getCopy(node: Node, hashTable: any): Node {
+    return hashTable.get(node)
+        ? hashTable.get(node)
+        : new Node(node.val)
+}
