@@ -14,12 +14,16 @@ var topKFrequent = function(nums, k) {
         map.set(num, map.get(num) + 1)
     }
     
-    const arr = new Array(nums.length + 1).fill([])
+    const arr = new Array(nums.length + 1)
+    
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = []
+    }
     
     for (const key of map.keys()) {
         const value = map.get(key)
         
-        arr[value] = [...arr[value], key]
+        arr[value].push(key)
     }
     
     const res = []
