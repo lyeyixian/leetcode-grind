@@ -11,25 +11,48 @@
  * @return {number[]}
  */
 var postorderTraversal = function(root) {
+    if (!root) {
+        return []
+    }
+    const stack = []
     const res = []
     
-    traverse(root, res)
+    stack.push(root)
+    
+    while (stack.length) {
+        const node = stack.pop()
+        
+        res.unshift(node.val)
+        
+        if (node.left) {
+            stack.push(node.left)
+        }
+        
+        if (node.right) {
+            stack.push(node.right)
+        }
+    }
     
     return res
 };
 
-function traverse(node, res) {
-    if (!node) {
-        return
-    }
+//     const res = []
     
-    if (node.left) {
-        traverse(node.left, res)
-    }
+//     traverse(root, res)
     
-    if (node.right) {
-        traverse(node.right, res)
-    }
+//     return res
+// function traverse(node, res) {
+//     if (!node) {
+//         return
+//     }
     
-    res.push(node.val)
-}
+//     if (node.left) {
+//         traverse(node.left, res)
+//     }
+    
+//     if (node.right) {
+//         traverse(node.right, res)
+//     }
+    
+//     res.push(node.val)
+// }
