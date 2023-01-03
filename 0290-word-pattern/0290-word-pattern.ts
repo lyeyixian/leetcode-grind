@@ -8,33 +8,23 @@ function wordPattern(pattern: string, s: string): boolean {
 
     // put word in Map<pattern, word>.
     // If word already in Map, check if they are the same word, return false if not
-    const map = new Map()
+    const patternToWord = new Map()
+    const wordToPattern = new Map()
     
     for (let i = 0; i < split.length; i++) {
         const patternChar = pattern[i]
         const word = split[i]
 
-        if (map.has(patternChar)) {
-            const wordToMatch = map.get(patternChar)
-
-            if (wordToMatch !== word) {
-                return false
-            }
-        } else {
-            map.set(patternChar, word)
-        }
-    }
-
-    // cannot have same word on different letter
-    // ex: abcd --> aaaa aaaa cccc dddd (wrong)
-    const set = new Set()
-
-    for (const [key, value] of map.entries()) {
-        if (set.has(value)) {
+        if (patternToWord.has(patternChar) && patternToWord.get(patternChar) !== word) {
             return false
         }
-
-        set.add(value)
+        
+        if (wordToPattern.has(word) && wordToPattern.get(word) !== patternChar) {
+            return false
+        }
+        
+        patternToWord.set(patternChar, word)
+        wordToPattern.set(word, patternChar)
     }
 
     return true
