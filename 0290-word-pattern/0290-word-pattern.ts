@@ -6,7 +6,7 @@ function wordPattern(pattern: string, s: string): boolean {
         return false
     }
 
-    // put word in Map.
+    // put word in Map<pattern, word>.
     // If word already in Map, check if they are the same word, return false if not
     const map = new Map()
     
