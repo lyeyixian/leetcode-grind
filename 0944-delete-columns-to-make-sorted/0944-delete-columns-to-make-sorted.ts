@@ -3,13 +3,13 @@ function minDeletionSize(strs: string[]): number {
     let numOfCol = 0
     
     // loop through col by col
-    for (let i = 0; i < wordLength; i++) {
+    for (let col = 0; col < wordLength; col++) {
         // loop through the char of that col of each str in strs
-        for (let j = 1; j < strs.length; j++) {
-            const currentStr = strs[j]
-            const prevStr = strs[j - 1]
+        for (let row = 1; row < strs.length; row++) {
+            const currentStr = strs[row]
+            const prevStr = strs[row - 1]
             
-            if (currentStr[i] < prevStr[i]) {
+            if (currentStr[col] < prevStr[col]) {
                 numOfCol++
                 break
             }
