@@ -6,20 +6,25 @@ function wordPattern(pattern: string, s: string): boolean {
         return false
     }
 
-    // put word in Map<pattern, word>.
-    // If word already in Map, check if they are the same word, return false if not
+    // have 2 map
+    //
+    // pattern --> word
+    // ex: a --> dog
+    //
+    // word --> pattern
+    // ex: dog --> a
+    //
+    // check if 'a' match to different thing when 'a' already exists in that respective map
     const patternToWord = new Map()
     const wordToPattern = new Map()
     
     for (let i = 0; i < split.length; i++) {
         const patternChar = pattern[i]
         const word = split[i]
-
-        if (patternToWord.has(patternChar) && patternToWord.get(patternChar) !== word) {
-            return false
-        }
+        const samePatternMatchToDifferentWord = patternToWord.has(patternChar) && patternToWord.get(patternChar) !== word
+        const sameWordMatchToDifferentPattern = wordToPattern.has(word) && wordToPattern.get(word) !== patternChar
         
-        if (wordToPattern.has(word) && wordToPattern.get(word) !== patternChar) {
+        if (samePatternMatchToDifferentWord || sameWordMatchToDifferentPattern) {
             return false
         }
         
