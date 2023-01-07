@@ -5,34 +5,49 @@ function canCompleteCircuit(gas: number[], cost: number[]): number {
         return -1
     }
     
-    const length = newCircuit.length
+    let currSum = 0
     let startingIdx = 0
-    let currPtr = wrapPtr(startingIdx + 1, length)
-    let currSum = newCircuit[startingIdx]
-    let gasStationVisited = startingIdx === currPtr ? 1 : 2
     
-    while (gasStationVisited <= length + 1) {
-        currSum += newCircuit[currPtr]
+    for (let i = 0; i < newCircuit.length; i++) {
+        currSum += newCircuit[i]
         
-        if (currSum < 0 || newCircuit[startingIdx] < 0) {
-            currSum -= (newCircuit[startingIdx] + newCircuit[currPtr])
-            gasStationVisited--
-            startingIdx = wrapPtr(startingIdx + 1, length)
-            
-            if (startingIdx === currPtr) {
-                currPtr = wrapPtr(currPtr + 1, length)
-                currSum += newCircuit[startingIdx]
-                gasStationVisited++
-            }
-            
-            continue
+        if (currSum < 0) {
+            currSum = 0
+            startingIdx = i + 1
         }
-        
-        currPtr = wrapPtr(currPtr + 1, length)
-        gasStationVisited++
     }
     
     return startingIdx
+    
+//     // there is no need to wrap around
+//     const length = newCircuit.length
+//     let startingIdx = 0
+//     let currPtr = wrapPtr(startingIdx + 1, length)
+//     let currSum = newCircuit[startingIdx]
+//     let gasStationVisited = startingIdx === currPtr ? 1 : 2
+    
+//     while (gasStationVisited <= length + 1) {
+//         currSum += newCircuit[currPtr]
+        
+//         if (currSum < 0 || newCircuit[startingIdx] < 0) {
+//             currSum -= (newCircuit[startingIdx] + newCircuit[currPtr])
+//             gasStationVisited--
+//             startingIdx = wrapPtr(startingIdx + 1, length)
+            
+//             if (startingIdx === currPtr) {
+//                 currPtr = wrapPtr(currPtr + 1, length)
+//                 currSum += newCircuit[startingIdx]
+//                 gasStationVisited++
+//             }
+            
+//             continue
+//         }
+        
+//         currPtr = wrapPtr(currPtr + 1, length)
+//         gasStationVisited++
+//     }
+    
+//     return startingIdx
 };
 
 function transformCircuit(gas, cost) {
@@ -48,11 +63,6 @@ function transformCircuit(gas, cost) {
     return arr
 }
     
-function wrapPtr(ptr, length) {
-    return ptr % length
-}
-
-// [1,2,3,4,5,5,70]
-// [2,3,4,3,9,6,2]
-
-// -1 -1 -1 1 -4 -1 68
+// function wrapPtr(ptr, length) {
+//     return ptr % length
+// }
