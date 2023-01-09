@@ -14,18 +14,41 @@
 
 function preorderTraversal(root: TreeNode | null): number[] {
     const arr = []
+    const stack = []
+
+    stack.push(root)
     
-    helper(root, arr)
+    while(stack.length) {
+        const node = stack.pop()
+        
+        if (!node) {
+            continue
+        }
+        
+        arr.push(node.val)
+        stack.push(node.right)
+        stack.push(node.left)
+    }
     
     return arr
 };
 
-function helper(node, arr) {
-    if (!node) {
-        return
-    }
+// Recursive solution
+// 
+// function preorderTraversal(root: TreeNode | null): number[] {
+//     const arr = []
     
-    arr.push(node.val)
-    helper(node.left, arr)
-    helper(node.right, arr)
-}
+//     helper(root, arr)
+    
+//     return arr
+// };
+
+// function helper(node, arr) {
+//     if (!node) {
+//         return
+//     }
+    
+//     arr.push(node.val)
+//     helper(node.left, arr)
+//     helper(node.right, arr)
+// }
