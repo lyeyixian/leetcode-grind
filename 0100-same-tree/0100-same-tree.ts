@@ -13,13 +13,44 @@
  */
 
 function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
-    if (!p && !q) {
-        return true
+    const queueP = []
+    const queueQ = []
+    
+    queueP.push(p)  
+    queueQ.push(q)    
+
+    while (queueP.length && queueQ.length) {
+        const nodeP = queueP.shift()
+        const nodeQ = queueQ.shift()
+        
+        if (!nodeP && !nodeQ) {
+            continue
+        }
+        
+        if (!nodeP || !nodeQ || nodeP.val !== nodeQ.val) {
+            return false
+        }
+        
+        
+        queueP.push(nodeP.left)
+        queueQ.push(nodeQ.left)
+        queueP.push(nodeP.right)
+        queueQ.push(nodeQ.right)
     }
     
-    if (!p || !q) {
-        return false
-    }
-    
-    return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+    return true
 };
+
+// Recursive solution
+//
+// function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
+//     if (!p && !q) {
+//         return true
+//     }
+    
+//     if (!p || !q) {
+//         return false
+//     }
+    
+//     return p.val === q.val && isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+// };
