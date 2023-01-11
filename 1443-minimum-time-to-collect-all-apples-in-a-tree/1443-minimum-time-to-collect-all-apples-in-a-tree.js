@@ -13,6 +13,8 @@ var minTime = function(n, edges, hasApple) {
     
     for (const [u, v] of edges) {
         adjList[u].push(v)
+        // need do this becos the given edges list might only have 1 direction
+        // or becos it is undirected graph
         adjList[v].push(u)
     }
 
@@ -23,6 +25,7 @@ function dfs(node, parent, adjList, hasApple) {
     let time = 0
     
     for (const v of adjList[node]) {
+        // this is to prevent visiting the parent
         if (v === parent) {
             continue
         }
