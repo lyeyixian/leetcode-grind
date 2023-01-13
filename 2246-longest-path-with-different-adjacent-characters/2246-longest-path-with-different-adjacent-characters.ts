@@ -10,7 +10,7 @@ function longestPath(parent: number[], s: string): number {
         const child = i
         
         adjList[par].push(child)
-        // adjList[child].push(par)
+        adjList[child].push(par)
     }
     
     const res = {
@@ -27,9 +27,9 @@ function dfs(node, parent, adjList, s, res) {
     let secondLongestChild = 0
     
     for (const child of adjList[node]) {
-        // if (child === parent) {
-        //     continue
-        // }
+        if (child === parent) {
+            continue
+        }
         
         const length = dfs(child, node, adjList, s, res)
         
