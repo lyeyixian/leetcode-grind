@@ -17,6 +17,7 @@ function smallestEquivalentString(s1: string, s2: string, baseStr: string): stri
     return res.join('')
 };
 
+// for union, need to put the smallest letter as the root
 function union(uf, x, y) {
     const rootX = find(uf, x)
     const rootY = find(uf, y)
