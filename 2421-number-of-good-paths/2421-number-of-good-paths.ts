@@ -34,6 +34,8 @@ function numberOfGoodPaths(vals: number[], edges: number[][]): number {
     
     let res = vals.length
     
+    // starts union find from lowest value nodes
+    // only union if neighbour from adjList have values <= current node
     for (const nodes of map.values()) {
         for (const node of nodes) {
             for (const neighbour of adjList[node]) {
