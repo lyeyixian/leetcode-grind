@@ -14,6 +14,7 @@ function findSubsequences(nums: number[]): number[][] {
 };
 
 function helper(index, nums, sequence, set) {
+    // reaching the end of nums
     if (index === nums.length) {
         if (sequence.length >= 2) {
             set.add(sequence.join(','))    
@@ -22,11 +23,13 @@ function helper(index, nums, sequence, set) {
         return
     }
     
+    // add current num to sequence
     if (!sequence.length || sequence[sequence.length - 1] <= nums[index]) {
         sequence.push(nums[index])
         helper(index + 1, nums, sequence, set)
         sequence.pop()
     }
     
+    // don't add the current num to sequence
     helper(index + 1, nums, sequence, set)
 }
