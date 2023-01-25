@@ -11,6 +11,8 @@ function closestMeetingNode(edges: number[], node1: number, node2: number): numb
         }
     }
     
+    // map: Node -> dist from src
+    // also used to check if a node is visited before
     const node1DistMap = new Map()
     const node2DistMap = new Map()
     
