@@ -1,12 +1,23 @@
 function tribonacci(n: number): number {
-    const mem = new Array(n + 1).fill(-1)
-    mem[0] = 0
-    mem[1] = 1
-    mem[2] = 1
+    if (n === 0) {
+        return 0
+    }
+    
+    if (n === 1 || n === 2) {
+        return 1
+    }
+    
+    let a = 0
+    let b = 1
+    let c = 1
+    let sum = 0
     
     for (let i = 3; i <= n; i++) {
-        mem[i] = mem[i - 3] + mem[i - 2] + mem[i - 1]
+        sum = a + b + c
+        a = b
+        b = c
+        c = sum
     }
         
-    return mem[n]
+    return c
 };
