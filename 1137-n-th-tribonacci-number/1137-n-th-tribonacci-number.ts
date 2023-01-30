@@ -4,7 +4,13 @@ function tribonacci(n: number): number {
     mem[1] = 1
     mem[2] = 1
     
-    return helper(n, mem)
+    // return helper(n, mem)
+    
+    for (let i = 3; i <= n; i++) {
+        mem[i] = mem[i - 3] + mem[i - 2] + mem[i - 1]
+    }
+        
+    return mem[n]
 };
 
 function helper(n, mem) {
