@@ -1,3 +1,5 @@
+// similar to Longest Increasing Subsequence (LIS) dp problem
+// dp[i] = max(dp[i], currentScore + dp[j]) for 0 < j < i
 function bestTeamScore(scores: number[], ages: number[]): number {
     const scoresAges = []
     
@@ -5,7 +7,11 @@ function bestTeamScore(scores: number[], ages: number[]): number {
         scoresAges.push({ score: scores[i], age: ages[i] })
     }
     
-    scoresAges.sort((a, b) => a.score === b.score ? a.age - b.age : a.score - b.score)
+    scoresAges.sort((a, b) => { 
+        return a.score === b.score 
+            ? a.age - b.age 
+            : a.score - b.score
+    })
     
     const dp = scoresAges.map(scoreAge => scoreAge.score)
     
