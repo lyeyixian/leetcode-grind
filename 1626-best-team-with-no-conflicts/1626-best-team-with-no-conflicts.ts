@@ -16,13 +16,13 @@ function bestTeamScore(scores: number[], ages: number[]): number {
     const dp = scoresAges.map(scoreAge => scoreAge.score)
     
     for (let i = 0; i < scoresAges.length; i++) {
-        const { score: maxScore, age: maxAge } = scoresAges[i]
+        const { score: currentScore, age: currentAge } = scoresAges[i]
         
         for (let j = 0; j < i; j++) {
-            const { score, age } = scoresAges[j]
+            const { score: prevScore, age: prevAge } = scoresAges[j]
             
-            if (maxAge >= age) {
-                dp[i] = Math.max(dp[i], dp[j] + maxScore)
+            if (currentAge >= prevAge) {
+                dp[i] = Math.max(dp[i], dp[j] + currentScore)
             }
         }
     }
