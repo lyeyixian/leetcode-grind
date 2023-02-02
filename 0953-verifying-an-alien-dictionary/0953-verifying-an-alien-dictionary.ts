@@ -24,8 +24,8 @@ function isAlienSorted(words: string[], order: string): boolean {
 
 function isLexicographicalOrder(str1, str2) {
     for (let i = 0; i < Math.max(str1.length, str2.length); i++) {
-        const char1 = str1?.[i] || ''
-        const char2 = str2?.[i] || ''
+        const char1 = str1[i] || ''
+        const char2 = str2[i] || ''
         
         if (char1 < char2) {
             return true
