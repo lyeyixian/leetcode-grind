@@ -1,4 +1,8 @@
 function convert(s: string, numRows: number): string {
+    if (numRows === 1) {
+        return s
+    }
+    
     const resArr = []
     
     for (let i = 0; i < numRows; i++) {
@@ -10,10 +14,6 @@ function convert(s: string, numRows: number): string {
     
     for (const char of s) {
         resArr[row].push(char)
-        
-        if (numRows === 1) {
-            continue
-        }
         
         if (row === numRows - 1) {
             toIncrement = false
