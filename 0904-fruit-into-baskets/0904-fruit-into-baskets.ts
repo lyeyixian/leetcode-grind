@@ -13,9 +13,7 @@ function totalFruit(fruits: number[]): number {
             map.set(fruit, 1)
             globalMax = Math.max(globalMax, right - left + 1)
         } else {
-            map.set(fruit, 1)
-            
-            while (map.size > 2) {
+            while (map.size >= 2) {
                 const fruitToEvict = fruits[left]
             
                 map.set(fruitToEvict, map.get(fruitToEvict) - 1)
@@ -25,6 +23,8 @@ function totalFruit(fruits: number[]): number {
                     map.delete(fruitToEvict)        
                 }    
             }
+            
+            map.set(fruit, 1)
         }
     }
     
