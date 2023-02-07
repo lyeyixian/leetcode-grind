@@ -6,26 +6,23 @@ function totalFruit(fruits: number[]): number {
     for (let right = 0; right < fruits.length; right++) {
         const fruit = fruits[right]
         
-        if (map.has(fruit)) {
-            map.set(fruit, map.get(fruit) + 1)
-            globalMax = Math.max(globalMax, right - left + 1)
-        } else if (map.size < 2) {
-            map.set(fruit, 1)
-            globalMax = Math.max(globalMax, right - left + 1)
-        } else {
-            while (map.size >= 2) {
-                const fruitToEvict = fruits[left]
-            
-                map.set(fruitToEvict, map.get(fruitToEvict) - 1)
-                left++
+        while (map.size >= 2 && !map.has(fruit)) {
+            const fruitToEvict = fruits[left]
 
-                if (map.get(fruitToEvict) === 0) {
-                    map.delete(fruitToEvict)        
-                }    
+            map.set(fruitToEvict, map.get(fruitToEvict) - 1)
+            left++
+
+            if (map.get(fruitToEvict) === 0) {
+                map.delete(fruitToEvict)        
             }
-            
-            map.set(fruit, 1)
         }
+        
+        if (!map.has(fruit)) {
+            map.set(fruit, 0)
+        }
+        
+        map.set(fruit, map.get(fruit) + 1)
+        globalMax = Math.max(globalMax, right - left + 1)
     }
     
     return globalMax
