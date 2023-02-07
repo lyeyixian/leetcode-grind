@@ -6,6 +6,7 @@ function totalFruit(fruits: number[]): number {
     for (let right = 0; right < fruits.length; right++) {
         const fruit = fruits[right]
         
+        // maintain the invariant of map size <= 2
         while (map.size >= 2 && !map.has(fruit)) {
             const fruitToEvict = fruits[left]
 
@@ -27,5 +28,3 @@ function totalFruit(fruits: number[]): number {
     
     return globalMax
 };
-
-// 3 1 3 1 1 3 2
