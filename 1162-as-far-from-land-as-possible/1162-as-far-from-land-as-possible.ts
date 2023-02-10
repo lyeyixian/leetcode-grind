@@ -2,6 +2,7 @@ function maxDistance(grid: number[][]): number {
     const queue = []
     const n = grid.length
     
+    // multisource bfs
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if (grid[i][j] === 1) {
@@ -16,7 +17,7 @@ function maxDistance(grid: number[][]): number {
     while (queue.length) {
         const [x, y] = queue.shift()
         
-        res = grid[x][y]
+        res = grid[x][y] // res is the last position we visit
         
         for (const [dx, dy] of direction) {
             const newX = x + dx
@@ -27,9 +28,9 @@ function maxDistance(grid: number[][]): number {
             }
             
             queue.push([newX, newY])
-            grid[newX][newY] = grid[x][y] + 1
+            grid[newX][newY] = grid[x][y] + 1 // use the original grid as visited also as the distance
         }
     }
     
-    return res > 1 ? res - 1 : -1
+    return res > 1 ? res - 1 : -1 // handle cases of all land
 };
