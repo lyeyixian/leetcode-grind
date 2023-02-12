@@ -29,11 +29,14 @@ function dfs(node, parent, res, adjList, seats) {
             continue
         }
         
-        const numPassengerAtSubtree = dfs(neighbour, node, res, adjList, seats)
+        const numPassengerAtNeighbour = dfs(neighbour, node, res, adjList, seats)
         
-        numPassengerAtCurr += numPassengerAtSubtree
-        res.data += Math.ceil(numPassengerAtSubtree / seats)
+        numPassengerAtCurr += numPassengerAtNeighbour    
     }
     
+    if (node !== 0) {
+        res.data += Math.ceil(numPassengerAtCurr / seats)    
+    }
+
     return numPassengerAtCurr
 }
