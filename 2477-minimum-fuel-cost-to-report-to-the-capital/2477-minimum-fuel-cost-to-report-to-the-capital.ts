@@ -35,7 +35,9 @@ function dfs(node, parent, res, adjList, seats) {
     }
     
     if (node !== 0) {
-        res.data += Math.ceil(numPassengerAtCurr / seats)    
+        const numCarNeeded = Math.ceil(numPassengerAtCurr / seats)
+        
+        res.data += numCarNeeded
     }
 
     return numPassengerAtCurr
