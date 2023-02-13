@@ -1,11 +1,10 @@
 function countOdds(low: number, high: number): number {
-    let count = 0
+    const length = high - low + 1
+    let res = Math.floor(length / 2)
     
-    for (let i = low; i <= high; i++) {
-        if (i % 2) {
-            count++
-        }
+    if (length % 2 && low % 2) {
+        res++
     }
     
-    return count
+    return res
 };
