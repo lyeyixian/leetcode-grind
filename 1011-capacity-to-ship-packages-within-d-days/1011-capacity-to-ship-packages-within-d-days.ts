@@ -33,14 +33,10 @@ function canShip(capacity, weights, days) {
         if (currentCapacity + weight > capacity) {
             currentCapacity = 0
             currentDay++
-            
-            if (currentDay > days) {
-                return false
-            }
         }
         
         currentCapacity += weight
     }
 
-    return true
+    return currentDay <= days
 }
