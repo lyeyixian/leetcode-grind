@@ -1,48 +1,32 @@
 function shipWithinDays(weights: number[], days: number): number {
-    let left = 0
+    let left = Math.max(...weights)
     let right = weights.reduce((a, b) => a + b)
-    // 0
-    // 8
-    // 4
-    // 0 3 1
-    // 2 3 2
-    while (left <= right) {
+
+    while (left < right) {
         const mid = Math.floor((left + right) / 2)
-        const canFit = helper(mid, weights, days)
         
-        if (canFit) {
-            if (!helper(mid - 1, weights, days)) {
-                return mid    
-            } else {
-                right = mid - 1
-            }
+        if (canShip(mid, weights, days)) {
+            right = mid
         } else {
             left = mid + 1
         }
     }
+    
+    return right
 };
 
-function helper(capacity, weights, days) {
+function canShip(capacity, weights, days) {
     let currentCapacity = 0
     let currentDay = 1
     
     for (const weight of weights) {
         if (currentCapacity + weight > capacity) {
-            currentCapacity = weight
-            
-            if (currentCapacity > capacity) {
-                return false
-            }
-            
+            currentCapacity = 0
             currentDay++
-            
-            if (currentDay > days) {
-                return false
-            }
-        } else {
-            currentCapacity += weight
         }
+        
+        currentCapacity += weight
     }
-    
-    return true
+
+    return currentDay <= days
 }
