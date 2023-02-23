@@ -1,30 +1,33 @@
 class Solution {
     public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
-        PriorityQueue<int[]> minPq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+        PriorityQueue<int[]> minCapital = new PriorityQueue<>((a, b) -> a[1] - b[1]);
         
         for (int i = 0; i < profits.length; i++) {
-            minPq.offer(new int[]{ profits[i], capital[i] });
+            minCapital.offer(new int[]{ profits[i], capital[i] });
         }
         
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        
-        fillPq(pq, w, profits, capital, minPq);
+        PriorityQueue<Integer> maxProfit = new PriorityQueue<>(Collections.reverseOrder());
         
         int resCapital = w;
         
-        for (int i = 0; i < k && !pq.isEmpty(); i++) {
-            int currentProfit = pq.poll();
+        for (int i = 0; i < k; i++) {
+            fillPq(maxProfit, resCapital, profits, capital, minCapital);
+            
+            if (maxProfit.isEmpty()) {
+                break;
+            }
+            
+            int currentProfit = maxProfit.poll();
             
             resCapital += currentProfit;
-            fillPq(pq, resCapital, profits, capital, minPq);
         }
         
         return resCapital;
     }
     
-    private void fillPq(PriorityQueue<Integer> pq, int currentCapital, int[] profits, int[] capital, PriorityQueue<int[]> minPq) {
-        while (!minPq.isEmpty() && minPq.peek()[1] <= currentCapital) {
-            pq.offer(minPq.poll()[0]);
+    private void fillPq(PriorityQueue<Integer> maxProfit, int currentCapital, int[] profits, int[] capital, PriorityQueue<int[]> minCapital) {
+        while (!minCapital.isEmpty() && minCapital.peek()[1] <= currentCapital) {
+            maxProfit.offer(minCapital.poll()[0]);
         }
     }
 }
