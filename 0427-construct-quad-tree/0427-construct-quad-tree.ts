@@ -23,25 +23,12 @@ function construct(grid: number[][]): Node | null {
 };
 
 function dfs(limit, row, col, grid) {
-    let allSameValue = true
-    
-    for (let i = 0; i < limit; i++) {
-        for (let j = 0; j < limit; j++) {
-            if (grid[row][col] !== grid[i + row][j + col]) {
-                allSameValue = false
-                break
-            }
-        }
-        
-        if (!allSameValue) {
-            break
-        }
-    }
-    
-    if (allSameValue) {
+    // leaf node base case
+    if (sameValue(limit, row, col, grid)) {
         return new Node(grid[row][col], true)
     }
     
+    // recurse on smaller grid with new limit and new row/col value
     const newLimit = Math.floor(limit / 2)
     const topLeft = dfs(newLimit, row, col, grid)
     const topRight = dfs(newLimit, row, col + newLimit, grid)
@@ -49,4 +36,17 @@ function dfs(limit, row, col, grid) {
     const bottomRight = dfs(newLimit, row + newLimit, col + newLimit, grid)
     
     return new Node(false, false, topLeft, topRight, bottomLeft, bottomRight)
+}
+
+// check if every value in the grid from row/col towards limit is the same
+function sameValue(limit, row, col, grid) {
+    for (let i = 0; i < limit; i++) {
+        for (let j = 0; j < limit; j++) {
+            if (grid[row][col] !== grid[i + row][j + col]) {
+                return false
+            }
+        }
+    }
+    
+    return true
 }
