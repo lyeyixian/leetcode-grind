@@ -15,7 +15,9 @@
 function findDuplicateSubtrees(root: TreeNode | null): Array<TreeNode | null> {
     const map = new Map()
     
-    function dfs(node, map) {
+    // do preorder traversal
+    // serialize every node and put them into hash table with the node as value
+    function dfs(node) {
         if (!node) {
             return
         }
@@ -27,14 +29,15 @@ function findDuplicateSubtrees(root: TreeNode | null): Array<TreeNode | null> {
         }
         
         map.get(key).push(node)
-        dfs(node.left, map)
-        dfs(node.right, map)
+        dfs(node.left)
+        dfs(node.right)
     }
 
-    dfs(root, map)
+    dfs(root)
 
     const res = []
     
+    // if the value has length larger than 1, means have duplicate
     for (const [key, value] of map.entries()) {
         if (value.length > 1) {
             res.push(value[0])
@@ -44,21 +47,22 @@ function findDuplicateSubtrees(root: TreeNode | null): Array<TreeNode | null> {
     return res
 };
 
+// serialize the node in preorder
 function serialize(node) {
     const arr = []
     
-    function dfs(node, arr) {
+    function dfs(node) {
         if (!node) {
             arr.push('N')
             return
         }
         
         arr.push(`${node.val}`)
-        dfs(node.left, arr)
-        dfs(node.right, arr)
+        dfs(node.left)
+        dfs(node.right)
     }
     
-    dfs(node, arr)
+    dfs(node)
     
     return arr.join(',')
 }
