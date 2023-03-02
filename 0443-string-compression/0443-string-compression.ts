@@ -38,9 +38,5 @@ function compress(chars: string[]): number {
         chars[i] = res[i]
     }
     
-    for (i; i < chars.length; i++) {
-        chars[i] = null
-    }
-    
     return res.length
 };
