@@ -1,42 +1,26 @@
 function compress(chars: string[]): number {
-    const res = []
-    let count = 0
+    let i = 0
+    let length = 0
     
-    for (let i = 0; i < chars.length; i++) {
-        if (i === 0) {
-            res.push(chars[i])
+    while (i < chars.length) {
+        let count = 1
+        
+        while (chars[i + count] === chars[i]) {
             count++
-        } else {
-            if (chars[i] === chars[i - 1]) {
-                count++
-                
-                if (i === chars.length - 1) {
-                    if (count > 9) {
-                        res.push(...count.toString().split(''))
-                    } else {
-                        res.push(count.toString())
-                    }
-                }
-            } else {
-                if (count > 1) {
-                    if (count > 9) {
-                        res.push(...count.toString().split(''))
-                    } else {
-                        res.push(count.toString())
-                    }
-                }
-                
-                res.push(chars[i])
-                count = 1
+        }
+        
+        chars[length] = chars[i]
+        length++
+        
+        if (count > 1) {
+            for (const char of count.toString().split('')) {
+                chars[length] = char
+                length++
             }
         }
+        
+        i += count
     }
     
-    let i
-    
-    for (i = 0; i < res.length; i++) {
-        chars[i] = res[i]
-    }
-    
-    return res.length
+    return length
 };
