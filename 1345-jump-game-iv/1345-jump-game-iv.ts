@@ -44,6 +44,8 @@ function minJumps(arr: number[]): number {
                 }
             }
             
+            // important to prevent TLE
+            // no need to visit again since all will be visited[sameValueNode]
             map.set(arr[node], [])
             
             visited[node] = true
