@@ -12,10 +12,21 @@ function findKthPositive(arr: number[], k: number): number {
             right = mid - 1
         }
     }
+    // left - 1 = the largest index that has num of missing number < k
+    //
+    // numMissingAtIdx = arr[left - 1] - left
+    // howManyMoreMissing = k - numMissingAtIdx
+    // res = arr[left - 1] + howManyMoreMissing
+    // 
+    // arr[left - 1] + k - numMissingAtIdx
+    // arr[left - 1] + k - (arr[left - 1] - left)
+    // k + left
     
-    return left + k
+    return k + left
 };
-
+// arr:                  [2,3,4,7,11]
+// arr[mid] - (mid + 1): [1,1,1,3,6]
+// k: 5
 //     let missingNumCount = 0
 //     let idx = 0
     
