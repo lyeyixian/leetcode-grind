@@ -17,6 +17,7 @@ class Solution {
         this.head = head
     }
 
+    // reservoir sampling
     getRandom(): number {
         let count = 1
         let current = this.head
