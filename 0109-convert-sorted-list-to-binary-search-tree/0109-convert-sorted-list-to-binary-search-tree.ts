@@ -32,7 +32,9 @@ function sortedListToBST(head: ListNode | null): TreeNode | null {
     return helper(head, null)
 };
 
+// recursively build bst from head to tail (exclusive)
 function helper(head: ListNode | null, tail: ListNode | null) {
+    // base case
     if (head === tail) {
         return null
     }
@@ -40,6 +42,7 @@ function helper(head: ListNode | null, tail: ListNode | null) {
     let slow = head
     let fast = head
     
+    // slow ptr will point to the node in the middle
     while (fast !== tail && fast.next !== tail) {
         slow = slow.next
         fast = fast.next.next
@@ -47,6 +50,7 @@ function helper(head: ListNode | null, tail: ListNode | null) {
     
     const root = new TreeNode(slow.val)
     
+    // recurse on left half and right half
     root.left = helper(head, slow)
     root.right = helper(slow.next, tail)
     
