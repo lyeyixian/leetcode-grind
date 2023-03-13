@@ -25,16 +25,16 @@
  */
 
 function sortedListToBST(head: ListNode | null): TreeNode | null {
+    if (!head) {
+        return null
+    }
+    
     return helper(head, null)
 };
 
 function helper(head: ListNode | null, tail: ListNode | null) {
-    if (!head || head === tail) {
+    if (head === tail) {
         return null
-    }
-    
-    if (head.next === tail) {
-        return new TreeNode(head.val)
     }
     
     let slow = head
