@@ -22,14 +22,14 @@ function sumNumbers(root: TreeNode | null): number {
         
         const currStr = str + node.val.toString()
         
-        helper(node.left, currStr)
-        helper(node.right, currStr)
-        
         if (!node.left && !node.right) {
             res += parseInt(currStr) || 0
             
             return
         }
+        
+        helper(node.left, currStr)
+        helper(node.right, currStr)
     }
     
     helper(root, '')
