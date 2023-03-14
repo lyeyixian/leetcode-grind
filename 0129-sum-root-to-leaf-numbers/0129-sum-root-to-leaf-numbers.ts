@@ -15,6 +15,7 @@
 function sumNumbers(root: TreeNode | null): number {
     let res = 0
     
+    // only can add when both left and right are null
     function helper(node, str) {
         if (!node) {
             return    
