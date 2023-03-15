@@ -21,29 +21,20 @@ function isCompleteTree(root: TreeNode | null): boolean {
     let encounterNull = false
     
     while (queue.length) {
-        const currentLength = queue.length
-        
-        for (let i = 0; i < currentLength; i++) {
-            const node = queue.shift()
-            
-            if (!node) {
-                encounterNull = true
-                continue
-            }
-            
-            if (encounterNull) {
-                return false
-            }
-            
-            queue.push(node.left)
-            queue.push(node.right)
+        const node = queue.shift()
+
+        if (!node) {
+            encounterNull = true
+            continue
         }
+
+        if (encounterNull) {
+            return false
+        }
+
+        queue.push(node.left)
+        queue.push(node.right)
     }
     
     return true
 };
-// 1
-// 2 3
-// 4 5 6 7
-// 8 9 10 11 12 13 null null
-// 15
