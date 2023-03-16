@@ -28,11 +28,9 @@ function buildTree(inorder: number[], postorder: number[]): TreeNode | null {
         
         const inRootIndex = findRootIndex(postIndex, inIndexStart, inIndexEnd)
         const node = new TreeNode(postorder[postIndex])
-        
-        node.right = build(postIndex - 1, inRootIndex + 1, inIndexEnd)
-        
         const numOfNodesOnRightSubtree = inIndexEnd - inRootIndex
         
+        node.right = build(postIndex - 1, inRootIndex + 1, inIndexEnd)
         node.left = build(postIndex - (numOfNodesOnRightSubtree + 1), inIndexStart, inRootIndex - 1)
         
         return node
