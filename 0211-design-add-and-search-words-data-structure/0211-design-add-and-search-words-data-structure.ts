@@ -51,6 +51,8 @@ class Trie {
                         return true
                     }
                 }
+                
+                return false
             } else {
                 if (!node.children.has(char)) {
                     return false
@@ -58,8 +60,6 @@ class Trie {
                 
                 return helper(index + 1, str, node.children.get(char))
             }
-            
-            return false
         }
         
         return helper(0, word, this.root)
