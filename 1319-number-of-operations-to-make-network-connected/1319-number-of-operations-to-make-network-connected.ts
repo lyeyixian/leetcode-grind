@@ -1,3 +1,4 @@
+// can also use union find to find the number of connected components
 function makeConnected(n: number, connections: number[][]): number {
     if (connections.length < n - 1) {
         return -1
@@ -28,7 +29,7 @@ function makeConnected(n: number, connections: number[][]): number {
         }
     }
     
-    let count = 0
+    let numConnectedComponents = 0
     
     for (let i = 0; i < n; i++) {
         if (visited[i]) {
@@ -36,8 +37,8 @@ function makeConnected(n: number, connections: number[][]): number {
         }
         
         dfs(i)
-        count++
+        numConnectedComponents++
     }
     
-    return count - 1
+    return numConnectedComponents - 1
 };
