@@ -1,3 +1,4 @@
+// can also use union find
 function countPairs(n: number, edges: number[][]): number {
     const adjList = []
     
