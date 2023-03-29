@@ -1,3 +1,4 @@
+// greedy solution
 function maxSatisfaction(satisfaction: number[]): number {
     satisfaction.sort((a, b) => a - b)
     
