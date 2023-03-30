@@ -2,12 +2,14 @@ function isScramble(s1: string, s2: string): boolean {
     const mem: Map<string, boolean> = new Map()
     
     function dp(s1, s2) {
-        if (mem.has(s1 + s2)) {
-            return mem.get(s1 + s2)
+        const key = `${s1},${s2}`
+        
+        if (mem.has(key)) {
+            return mem.get(key)
         }
         
         if (s1.length === 1 && s1 === s2 || s1 === s2) {
-            mem.set(s1 + s2, true)
+            mem.set(key, true)
             
             return true
         }
@@ -21,13 +23,13 @@ function isScramble(s1: string, s2: string): boolean {
             const s1Xs1Ys2Ys2X = dp(s1X, s2.substring(n - i)) && dp(s1Y, s2.substring(0, n - i))
             
             if (s1Xs1Ys2Xs2Y || s1Xs1Ys2Ys2X) {
-                mem.set(s1 + s2, true)
+                mem.set(key, true)
                 
                 return true
             }
         }
         
-        mem.set(s1 + s2, false)
+        mem.set(key, false)
         return false
     }
     
