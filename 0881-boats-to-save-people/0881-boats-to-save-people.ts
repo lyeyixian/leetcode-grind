@@ -5,21 +5,15 @@ function numRescueBoats(people: number[], limit: number): number {
     let right = people.length - 1
     let numBoat = 0
     
-    while (left < right) {
+    while (left <= right) {
         const heaviest = people[right]
         const lightest = people[left]
         
         if (heaviest + lightest <= limit) {
             left++
-            right--
-        } else {
-            right--
         }
         
-        numBoat++
-    }
-    
-    if (left === right) {
+        right--
         numBoat++
     }
     
