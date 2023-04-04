@@ -1,5 +1,5 @@
 function partitionString(s: string): number {
-    let count = 0
+    let count = 1
     let set = new Set()
     
     for (const char of s) {
@@ -10,8 +10,6 @@ function partitionString(s: string): number {
             
         set.add(char)
     }
-    
-    count++
     
     return count
 };
