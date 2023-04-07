@@ -44,13 +44,6 @@ function numEnclaves(grid: number[][]): number {
     return count
 };
 
-[
-    [0,1,1,0],
-    [0,0,1,0],
-    [0,0,1,0],
-    [0,0,0,0]
-]
-
 // function numEnclaves(grid: number[][]): number {
 //     const m = grid.length
 //     const n = grid[0].length
