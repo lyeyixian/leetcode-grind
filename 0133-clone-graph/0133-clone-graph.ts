@@ -17,15 +17,21 @@ function cloneGraph(node: Node | null): Node | null {
     if (!node) {
         return null
     }
+    
+    function getOrCreateCopy(node: Node): Node {
+        return hashTable.has(node)
+            ? hashTable.get(node)
+            : new Node(node.val)
+    }
 
     queue.push(node)
 
     while (queue.length) {
         const current = queue.shift()
-        const currentCopy = getCopy(current, hashTable)
+        const currentCopy = getOrCreateCopy(current)
 
         for (const neighbor of current.neighbors) {
-            const neighborCopy = getCopy(neighbor, hashTable)
+            const neighborCopy = getOrCreateCopy(neighbor)
 
             currentCopy.neighbors.push(neighborCopy)
 
@@ -41,9 +47,3 @@ function cloneGraph(node: Node | null): Node | null {
 
     return hashTable.get(node)
 };
-
-function getCopy(node: Node, hashTable: any): Node {
-    return hashTable.has(node)
-        ? hashTable.get(node)
-        : new Node(node.val)
-}
