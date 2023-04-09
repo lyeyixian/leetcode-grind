@@ -1,22 +1,7 @@
 function largestPathValue(colors: string, edges: number[][]): number {
-    const n = colors.length
-    const adjList = []
-    
-    for (let i = 0; i < n; i++) {
-        adjList.push([])
-    }
-    
-    for (const [a, b] of edges) {
-        adjList[a].push(b)
-    }
-    
-    const colorFreqMatrix = []
-    
-    for (let i = 0; i < n; i++) {
-        colorFreqMatrix.push(new Array(26).fill(0))
-    }
-    
+    // return the maximum color frequency for all path starting from that node
     function dfs(node) {
+        // to check for cycle
         if (path[node]) {
             return -1
         }
@@ -36,7 +21,7 @@ function largestPathValue(colors: string, edges: number[][]): number {
             }
             
             for (let i = 0; i < 26; i++) {
-               colorFreqMatrix[node][i] = Math.max(colorFreqMatrix[node][i], colorFreqMatrix[neighbour][i]) 
+               colorFreqMatrix[node][i] = Math.max(colorFreqMatrix[node][i], colorFreqMatrix[neighbour][i])
             }
         }
         
@@ -44,6 +29,23 @@ function largestPathValue(colors: string, edges: number[][]): number {
         path[node] = false
         
         return Math.max(...colorFreqMatrix[node])
+    }
+    
+    const n = colors.length
+    const adjList = []
+    
+    for (let i = 0; i < n; i++) {
+        adjList.push([])
+    }
+    
+    for (const [a, b] of edges) {
+        adjList[a].push(b)
+    }
+    
+    const colorFreqMatrix = []
+    
+    for (let i = 0; i < n; i++) {
+        colorFreqMatrix.push(new Array(26).fill(0))
     }
     
     const visited = new Array(n).fill(false)
