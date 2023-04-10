@@ -9,10 +9,8 @@ function isValid(s: string): boolean {
     for (const bracket of s) {
         if (['(', '{', '['].includes(bracket)) {
             stack.push(bracketMap[bracket])
-        } else {
-            if (!stack.length || bracket !== stack.pop()) {
-                return false
-            }
+        } else if (!stack.length || bracket !== stack.pop()) {
+            return false
         }
     }
     
