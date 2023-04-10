@@ -10,13 +10,7 @@ function isValid(s: string): boolean {
         if (['(', '{', '['].includes(bracket)) {
             stack.push(bracketMap[bracket])
         } else {
-            if (!stack.length) {
-                return false
-            }
-            
-            const topBracket = stack.pop()
-            
-            if (bracket !== topBracket) {
+            if (!stack.length || bracket !== stack.pop()) {
                 return false
             }
         }
