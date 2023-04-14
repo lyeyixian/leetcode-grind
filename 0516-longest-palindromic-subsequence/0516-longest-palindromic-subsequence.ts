@@ -13,6 +13,7 @@ function longestPalindromeSubseq(s: string): number {
         }
         
         if (mem[i][j] !== -1) {
+            max = Math.max(max, mem[i][j])
             return mem[i][j]
         }
         
@@ -24,15 +25,16 @@ function longestPalindromeSubseq(s: string): number {
             mem[i][j] = Math.max(dp(i - 1, j), dp(i, j + 1))
         }
         
+        max = Math.max(mem[i][j])
+        
         return mem[i][j]
     }
     
     for (let i = 0; i < s.length; i++) {
-        dp(i, i)
-        dp(i, i + 1)
+        max = Math.max(max, dp(i, i), dp(i, i + 1))
     }
     
-    return Math.max(...mem.map(arr => Math.max(...arr)))
+    return max
 };
 
 // use LCS solution to solve this by reversing the string and put it as the 2nd argument
