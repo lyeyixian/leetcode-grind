@@ -13,7 +13,6 @@ function longestPalindromeSubseq(s: string): number {
         }
         
         if (mem[i][j] !== -1) {
-            max = Math.max(max, mem[i][j])
             return mem[i][j]
         }
         
@@ -25,13 +24,14 @@ function longestPalindromeSubseq(s: string): number {
             mem[i][j] = Math.max(dp(i - 1, j), dp(i, j + 1))
         }
         
-        max = Math.max(mem[i][j])
+        max = Math.max(max, mem[i][j])
         
         return mem[i][j]
     }
     
     for (let i = 0; i < s.length; i++) {
-        max = Math.max(max, dp(i, i), dp(i, i + 1))
+        dp(i, i)
+        dp(i, i + 1)
     }
     
     return max
