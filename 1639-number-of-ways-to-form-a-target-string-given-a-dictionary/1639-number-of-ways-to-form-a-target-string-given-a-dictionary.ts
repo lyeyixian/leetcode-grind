@@ -37,12 +37,14 @@ function numWays(words: string[], target: string): number {
             return mem[i][k]
         }
         
-        const currChar = target[i]
-        let res = dp(i, k + 1) // skip current char at k
-        const key = `${k},${currChar}`
-        res += dp(i + 1, k + 1) * map.get(key) || 0 // select current char at k
-        res %= modulo
+        // skip current char at k
+        let res = dp(i, k + 1) 
         
+        // select current char at k
+        const currCharCountAtK = map.get(`${k},${target[i]}`) || 0
+        
+        res += dp(i + 1, k + 1) * currCharCountAtK 
+        res %= modulo
         mem[i][k] = res
         
         return res
