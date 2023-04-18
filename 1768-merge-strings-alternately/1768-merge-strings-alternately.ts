@@ -10,11 +10,9 @@ function mergeAlternately(word1: string, word2: string): string {
         ptr2++
     }
     
-    if (ptr1 < word1.length) {
-        res.push(word1.substring(ptr1))
-    } else if (ptr2 < word2.length) {
-        res.push(word2.substring(ptr2))
-    }
+
+    res.push(word1.substring(ptr1))
+    res.push(word2.substring(ptr2))
     
     return res.join('')
 };
