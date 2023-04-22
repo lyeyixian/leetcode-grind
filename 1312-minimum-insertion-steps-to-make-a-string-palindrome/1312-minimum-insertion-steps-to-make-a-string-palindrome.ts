@@ -15,11 +15,13 @@ function minInsertions(s: string): number {
             return mem[left][right]
         }
         
-        mem[left][right] = s[left] === s[right]
+        const res = s[left] === s[right]
             ? dp(left + 1, right - 1)
             : 1 + Math.min(dp(left + 1, right), dp(left, right - 1))
         
-        return mem[left][right]
+        mem[left][right] = res
+        
+        return res
     }
     
     return dp(0, s.length - 1)
