@@ -6,12 +6,8 @@ function numSimilarGroups(strs: string[]): number {
     }
     
     for (let i = 0; i < strs.length - 1; i++) {
-        const str1 = strs[i]
-        
         for (let j = i + 1; j < strs.length; j++) {
-            const str2 = strs[j]
-            
-            if (isSimilar(str1, str2)) {
+            if (isSimilar(strs[i], strs[j])) {
                 union(uf, i, j)
             }
         }
