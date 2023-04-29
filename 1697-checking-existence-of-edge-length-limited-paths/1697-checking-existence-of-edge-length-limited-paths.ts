@@ -1,7 +1,10 @@
 function distanceLimitedPathsExist(n: number, edgeList: number[][], queries: number[][]): boolean[] {
+    // need store idx of original as the return result need to follow the original order of queries
     const newQueries = queries.map((query, idx) => [...query, idx])
     
+    // sort both queries and edgeList, so just need to iterate through them once and union them. no need keep repeating the same edge
     newQueries.sort((a, b) => a[2] - b[2])
+    edgeList.sort((a, b) => a[2] - b[2])
     
     const uf = []
     
@@ -28,8 +31,6 @@ function distanceLimitedPathsExist(n: number, edgeList: number[][], queries: num
     
     let edgeIdx = 0
     const res = []
-    
-    edgeList.sort((a, b) => a[2] - b[2])
     
     for (const [p, q, limit, idx] of newQueries) {
         while (edgeIdx < edgeList.length && edgeList[edgeIdx][2] < limit) {
