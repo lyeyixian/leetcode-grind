@@ -5,6 +5,7 @@ function maxNumEdgesToRemove(n: number, edges: number[][]): number {
     
     for (const [type, u, v] of edges) {
         if (type === 3) {
+            // union both graph but only count as 1 added edge
             count += (aliceUF.union(u, v) | bobUF.union(u, v))
         }
     }
