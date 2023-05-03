@@ -2,20 +2,8 @@ function findDifference(nums1: number[], nums2: number[]): number[][] {
     nums1.sort((a, b) => a - b)
     nums2.sort((a, b) => a - b)
     
-    for (let i = 1; i < nums1.length; i++) {
-        if (nums1[i - 1] === nums1[i]) {
-            nums1[i - 1] = null
-        }
-    }
-    
-    for (let i = 1; i < nums2.length; i++) {
-        if (nums2[i - 1] === nums2[i]) {
-            nums2[i - 1] = null
-        }
-    }
-    
-    const newNums1 = nums1.filter(num => num !== null)
-    const newNums2 = nums2.filter(num => num !== null)
+    const newNums1 = removeDuplicate(nums1)
+    const newNums2 = removeDuplicate(nums2)
     let ptr1 = 0
     let ptr2 = 0
     
@@ -42,3 +30,13 @@ function findDifference(nums1: number[], nums2: number[]): number[][] {
     
     return [newNums1.filter(num => num !== null), newNums2.filter(num => num !== null)]
 };
+
+function removeDuplicate(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i - 1] === arr[i]) {
+            arr[i - 1] = null
+        }
+    }
+    
+    return arr.filter(num => num !== null)
+}
