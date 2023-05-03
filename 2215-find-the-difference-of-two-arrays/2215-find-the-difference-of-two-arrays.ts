@@ -1,33 +1,34 @@
 function findDifference(nums1: number[], nums2: number[]): number[][] {
-    const set1 = new Set()
-    const set2 = new Set()
+    const set1 = createSet(nums1)
+    const set2 = createSet(nums2)
     
-    for (const num of nums1) {
-        set1.add(num)
-    }
-    
-    for (const num of nums2) {
-        set2.add(num)
-    }
-    
-    const res1 = []
-    
-    for (const num of set1.values()) {
-        if (!set2.has(num)) {
-            res1.push(num)
-        }
-    }
-    
-    const res2 = []
-    
-    for (const num of set2.values()) {
-        if (!set1.has(num)) {
-            res2.push(num)
-        }
-    }
+    const res1 = findDifferenceInSet1(set1, set2)
+    const res2 = findDifferenceInSet1(set2, set1)
     
     return [res1, res2]
 };
+
+function createSet(arr) {
+    const set = new Set()
+    
+    for (const num of arr) {
+        set.add(num)
+    }
+    
+    return set
+}
+
+function findDifferenceInSet1(set1, set2) {
+    const res = []
+    
+    for (const num of set1.values()) {
+        if (!set2.has(num)) {
+            res.push(num)
+        }
+    }
+    
+    return res
+}
 
 // function findDifference(nums1: number[], nums2: number[]): number[][] {
 //     nums1.sort((a, b) => a - b)
