@@ -23,7 +23,11 @@ function findDifference(nums1: number[], nums2: number[]): number[][] {
         const num1 = newNums1[ptr1]
         const num2 = newNums2[ptr2]
         
-        if (num1 === num2) {
+        if (num1 < num2) {
+            ptr1++
+        } else if (num1 > num2) {
+            ptr2++
+        } else {
             while (ptr1 < newNums1.length && newNums1[ptr1] === num1) {
                 newNums1[ptr1] = null
                 ptr1++    
@@ -31,12 +35,6 @@ function findDifference(nums1: number[], nums2: number[]): number[][] {
             
             while (ptr2 < newNums2.length && newNums2[ptr2] === num2) {
                 newNums2[ptr2] = null
-                ptr2++
-            }
-        } else {
-            if (num1 < num2) {
-                ptr1++
-            } else {
                 ptr2++
             }
         }
