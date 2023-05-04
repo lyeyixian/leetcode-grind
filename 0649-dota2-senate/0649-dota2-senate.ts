@@ -15,8 +15,9 @@ function predictPartyVictory(senate: string): string {
         const rIdx = rQueue.shift()
         const qIdx = dQueue.shift()
         
+        // smaller idx ban the larger idx
         if (rIdx < qIdx) {
-            rQueue.push(rIdx + n)
+            rQueue.push(rIdx + n) // + n to indicate it is not this round but next round
         } else {
             dQueue.push(qIdx + n)
         }
@@ -26,6 +27,7 @@ function predictPartyVictory(senate: string): string {
 }
 
 // function predictPartyVictory(senate: string): string {
+//     // find the char starting from fromIndex and ban it
 //     function ban(char, fromIndex) {
 //         while (true) {
 //             if (senate[fromIndex] === char && !banned[fromIndex]) {
