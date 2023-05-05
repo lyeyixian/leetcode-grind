@@ -18,13 +18,12 @@ function maxVowels(s: string, k: number): number {
     
     let res = count
     
-    while (right < s.length) {
+    for (let right = k; right < s.length; right++) {
         if (vowel.has(s[left])) {
             count--
         }
         
         left++
-        right++
         
         if (vowel.has(s[right])) {
             count++
