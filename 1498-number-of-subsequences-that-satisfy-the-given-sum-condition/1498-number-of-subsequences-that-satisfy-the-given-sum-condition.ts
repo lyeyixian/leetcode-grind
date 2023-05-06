@@ -4,6 +4,7 @@ function numSubseq(nums: number[], target: number): number {
     const modulo = 1000000007
     const power = [1]
     
+    // precompute power of 2
     for (let i = 1; i < nums.length; i++) {
         power[i] = (power[i - 1] * 2) % modulo
     }
@@ -14,7 +15,7 @@ function numSubseq(nums: number[], target: number): number {
     
     while (left <= right) {
         if (nums[left] + nums[right] <= target) {
-            res += (power[right - left] % modulo)
+            res += power[right - left] // got 2 choice for each value from left + 1 to right
             res %= modulo
             left++
         } else {
