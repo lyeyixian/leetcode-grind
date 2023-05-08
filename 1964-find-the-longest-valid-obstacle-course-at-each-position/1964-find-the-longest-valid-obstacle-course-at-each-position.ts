@@ -1,6 +1,6 @@
 function longestObstacleCourseAtEachPosition(obstacles: number[]): number[] {
     const n = obstacles.length
-    const res = new Array(n).fill(1)
+    const res = []
     const lis = [] // lis[i] = longest increasing subsequence of length i + 1
     
     for (let i = 0; i < n; i++) {
