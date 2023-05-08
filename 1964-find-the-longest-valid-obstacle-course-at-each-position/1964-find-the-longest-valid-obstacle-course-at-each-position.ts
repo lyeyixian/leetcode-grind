@@ -1,10 +1,10 @@
 function longestObstacleCourseAtEachPosition(obstacles: number[]): number[] {
     const n = obstacles.length
     const res = []
-    const lis = [] // lis[i] = longest increasing subsequence of length i + 1
+    const lis = [] // lis[i] = the max height of the longest increasing subsequence of length i + 1
     
     for (const height of obstacles) {
-        const length = binarySearch(lis, height) // find the longest length with the height <= current height
+        const length = binarySearch(lis, height) // find the longest length (rightmost idx) with the height <= current height
         
         lis[length] = height
         res.push(length + 1)
