@@ -1,5 +1,6 @@
 function maxScore(nums: number[]): number {
     const n = nums.length
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b)
     const mem = new Map()
     
     function dp(mask, operation) {
@@ -20,7 +21,7 @@ function maxScore(nums: number[]): number {
                 }
                 
                 const score = operation * gcd(nums[i], nums[j])
-                const newMask = mask | pickI | pickJ
+                const newMask = mask | pickI | pickJ // mark i and j as picked
                 
                 res = Math.max(res, score + dp(newMask, operation + 1))
             }
@@ -33,11 +34,3 @@ function maxScore(nums: number[]): number {
     
     return dp(0, 1)
 };
-
-function gcd(a, b) {
-    if (b === 0) {
-        return a
-    } else {
-        return gcd(b, a % b)
-    }
-}
