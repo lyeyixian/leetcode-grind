@@ -10,6 +10,7 @@ function maxScore(nums: number[]): number {
         
         let res = 0
         
+        // enumerate all possible combinations
         for (let i = 0; i < n; i++) {
             for (let j = i + 1; j < n; j++) {
                 const pickI = 1 << i
