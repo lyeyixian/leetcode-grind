@@ -10,28 +10,64 @@
  * }
  */
 
+// swapping nodes
 function swapNodes(head: ListNode | null, k: number): ListNode | null {
-    let firstNode = head
+    let dummy = new ListNode(-1, head)
+    let prevLeft = dummy
+    let prevRight = dummy
+    let left = head
+    let right = head
     
     for (let i = 1; i < k; i++) {
-        firstNode = firstNode.next
+        prevLeft = left
+        left = left.next
     }
     
-    let secondNode = head
-    let fast = head
-    
-    for (let i = 0; i < k; i++) {
-        fast = fast.next
-    }
+    let fast = left.next
     
     while (fast !== null) {
-        secondNode = secondNode.next
         fast = fast.next
+        prevRight = right
+        right = right.next
     }
     
-    const temp = firstNode.val
-    firstNode.val = secondNode.val
-    secondNode.val = temp
+    if (left === right) {
+        return head
+    }
     
-    return head
+    prevLeft.next = right
+    prevRight.next = left
+    
+    const temp = left.next
+    left.next = right.next
+    right.next = temp
+    
+    return dummy.next
 };
+
+// swapping values
+// function swapNodes(head: ListNode | null, k: number): ListNode | null {
+//     let firstNode = head
+    
+//     for (let i = 1; i < k; i++) {
+//         firstNode = firstNode.next
+//     }
+    
+//     let secondNode = head
+//     let fast = head
+    
+//     for (let i = 0; i < k; i++) {
+//         fast = fast.next
+//     }
+    
+//     while (fast !== null) {
+//         secondNode = secondNode.next
+//         fast = fast.next
+//     }
+    
+//     const temp = firstNode.val
+//     firstNode.val = secondNode.val
+//     secondNode.val = temp
+    
+//     return head
+// };
