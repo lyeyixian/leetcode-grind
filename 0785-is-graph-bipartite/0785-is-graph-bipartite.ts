@@ -1,6 +1,10 @@
 function isBipartite(graph: number[][]): boolean {
     const n = graph.length
-    const visited = new Array(n).fill(0)
+    
+    // 0 -> not visited
+    // 1 -> blue node
+    // -1 -> red node
+    const visited = new Array(n).fill(0) 
     
     function bfs(node) {
         if (visited[node]) {
