@@ -23,7 +23,7 @@ function isBipartite(graph: number[][]): boolean {
                     return false
                 } else if (!visited[neighbour]) {
                     queue.push(neighbour)
-                    visited[neighbour] = visited[curr] * -1
+                    visited[neighbour] = visited[curr] * -1 // alternate color
                 }
             }
         }
@@ -32,6 +32,7 @@ function isBipartite(graph: number[][]): boolean {
     }
     
     for (let i = 0; i < n; i++) {
+        // bfs on every node, becos might not be connected
         if (!bfs(i)) {
             return false
         }
