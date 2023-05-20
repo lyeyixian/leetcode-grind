@@ -48,13 +48,7 @@ function calcEquation(equations: string[][], values: number[], queries: string[]
         adjList[v].push({ id: u, value: 1 / value })
     }
     
-    const res = []
-    
-    for (const [from, to] of queries) {
-        res.push(bfs(from, to))
-    }
-    
-    return res
+    return queries.map(([from, to]) => bfs(from, to))
 };
 
 // dfs
