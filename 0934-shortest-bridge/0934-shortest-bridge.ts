@@ -7,10 +7,14 @@ function shortestBridge(grid: number[][]): number {
         visited[i] = new Array(n).fill(false)
     }
     
+    function invalid(i, j) {
+        return i < 0 || j < 0 || i >= n || j >= n
+    }
+    
     // visit the first island and populate the queue with initial water to visit
     function populateQueue() {
         function dfs(i, j) {
-            if (i < 0 || j < 0 || i >= n || j >= n || visited[i][j]) {
+            if (invalid(i, j) || visited[i][j]) {
                 return
             }
 
@@ -50,7 +54,7 @@ function shortestBridge(grid: number[][]): number {
         for (let i = 0; i < currentLength; i++) {
             const [x, y] = queue.shift()
             
-            if (x < 0 || y < 0 || x >= n || y >= n || visited[x][y]) {
+            if (invalid(x, y) || visited[x][y]) {
                 continue
             }
             
