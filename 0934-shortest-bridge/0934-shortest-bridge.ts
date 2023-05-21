@@ -1,5 +1,11 @@
 function shortestBridge(grid: number[][]): number {    
     const direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+    const n = grid.length
+    const visited = []
+    
+    for (let i = 0; i < n; i++) {
+        visited[i] = new Array(n).fill(false)
+    }
     
     // visit the first island and populate the queue with initial water to visit
     function populateQueue() {
@@ -34,19 +40,13 @@ function shortestBridge(grid: number[][]): number {
         }
     }
     
-    const n = grid.length
-    const visited = []
-    
-    for (let i = 0; i < n; i++) {
-        visited[i] = new Array(n).fill(false)
-    }
-    
     const queue = populateQueue()
     let step = 0
     
     while (queue.length) {
         const currentLength = queue.length
         
+        // perform bfs level by level    
         for (let i = 0; i < currentLength; i++) {
             const [x, y] = queue.shift()
             
@@ -54,6 +54,7 @@ function shortestBridge(grid: number[][]): number {
                 continue
             }
             
+            // found the second island, return the step used
             if (grid[x][y] === 1) {
                 return step
             }
@@ -67,6 +68,4 @@ function shortestBridge(grid: number[][]): number {
         
         step++
     }
-    
-    return step
 };
