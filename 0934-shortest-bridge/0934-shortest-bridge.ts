@@ -1,4 +1,5 @@
 function shortestBridge(grid: number[][]): number {    
+    const direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
     function populateQueue() {
         function dfs(i, j) {
             if (i < 0 || j < 0 || i >= n || j >= n || visited[i][j]) {
@@ -9,10 +10,10 @@ function shortestBridge(grid: number[][]): number {
                 queue.push([i, j])
             } else {
                 visited[i][j] = true
-                dfs(i + 1, j)
-                dfs(i - 1, j)
-                dfs(i, j + 1)
-                dfs(i, j - 1)   
+                
+                for (const [dx, dy] of direction) {
+                    dfs(i + dx, j + dy)
+                }
             }
         }
         
@@ -56,10 +57,10 @@ function shortestBridge(grid: number[][]): number {
             }
             
             visited[x][y] = true
-            queue.push([x + 1, y])
-            queue.push([x - 1, y])
-            queue.push([x, y + 1])
-            queue.push([x, y - 1])
+
+            for (const [dx, dy] of direction) {
+                queue.push([x + dx, y + dy])
+            }
         }
         
         step++
