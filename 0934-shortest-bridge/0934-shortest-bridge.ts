@@ -1,11 +1,14 @@
 function shortestBridge(grid: number[][]): number {    
     const direction = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+    
+    // visit the first island and populate the queue with initial water to visit
     function populateQueue() {
         function dfs(i, j) {
             if (i < 0 || j < 0 || i >= n || j >= n || visited[i][j]) {
                 return
             }
 
+            // if is water, push to queue
             if (grid[i][j] === 0) {
                 queue.push([i, j])
             } else {
@@ -24,12 +27,11 @@ function shortestBridge(grid: number[][]): number {
                 if (grid[i][j] === 1) {
                     dfs(i, j)
                     
+                    // only visit the first island, so immediately return
                     return queue
                 }
             }
         }
-        
-        return queue
     }
     
     const n = grid.length
