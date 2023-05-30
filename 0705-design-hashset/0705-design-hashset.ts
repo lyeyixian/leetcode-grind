@@ -1,20 +1,65 @@
+class Node {
+    value
+    next
+    
+    constructor(value, next) {
+        this.value = value
+        this.next = next
+    }    
+}
+
 class MyHashSet {
     arr
+    size
     
     constructor() {
         this.arr = []
+        this.size = 10000
+        
+        for (let i = 0; i < this.size; i++) {
+            this.arr[i] = new Node(-1, null)
+        }
     }
 
     add(key: number): void {
-        this.arr[key] = 1
+        let currNode = this.arr[key % this.size]
+        
+        while (currNode.next) {
+            if (currNode.next.value === key) {
+                return
+            }
+            
+            currNode = currNode.next
+        }
+        
+        currNode.next = new Node(key, null)
     }
 
     remove(key: number): void {
-        this.arr[key] = 0
+        let currNode = this.arr[key % this.size]
+        
+        while (currNode.next) {
+            if (currNode.next.value === key) {
+                currNode.next = currNode.next.next
+                return
+            }
+            
+            currNode = currNode.next
+        }
     }
 
     contains(key: number): boolean {
-        return Boolean(this.arr[key])
+        let currNode = this.arr[key % this.size]
+        
+        while (currNode.next) {
+            if (currNode.next.value === key) {
+                return true
+            }
+            
+            currNode = currNode.next
+        }
+        
+        return false
     }
 }
 
