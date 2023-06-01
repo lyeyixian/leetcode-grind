@@ -1,15 +1,6 @@
 function shortestPathBinaryMatrix(grid: number[][]): number {
     const n = grid.length
     const dir = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]]
-    
-    if (grid[0][0] || grid[n - 1][n - 1]) {
-        return -1
-    }
-    
-    if (n === 1 && grid[0][0] === 0) {
-        return 1
-    }
-    
     const visited = []
     
     for (let i = 0; i < n; i++) {
@@ -19,32 +10,34 @@ function shortestPathBinaryMatrix(grid: number[][]): number {
     let count = 1
     const queue = [[0, 0]]
     
-    visited[0][0] = true
+    
     
     while (queue.length) {
         const currLength = queue.length
         
         for (let i = 0; i < currLength; i++) {
             const [x, y] = queue.shift()
+            
+            if (x < 0 || y < 0 || x >= n || y >= n || visited[x][y] || grid[x][y]) {
+                continue
+            }
+            
+            visited[x][y] = true
+             
+            
+            if (x === n - 1 && y === n - 1) {
+                return count
+            }
         
             for (const [dx, dy] of dir) {
                 const newX = x + dx
                 const newY = y + dy
 
-                if (newX < 0 || newY < 0 || newX >= n || newY >= n || visited[newX][newY] || grid[newX][newY]) {
-                    continue
-                }
-
-                if (newX === n - 1 && newY === n - 1) {
-                    return count + 1
-                }
-
                 queue.push([newX, newY])
-                visited[newX][newY] = true
             }
         }
         
-        count++  
+        count++ 
     }
     
     return -1
