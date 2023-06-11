@@ -26,6 +26,10 @@ class SnapshotArray {
     private findSnapId(index, snapId) {
         const map = this.snapshots[index]
         
+        if (map.has(snapId)) {
+            return snapId
+        }
+        
         while (snapId > 0 && !map.has(snapId)) {
             snapId--
         }
@@ -41,6 +45,3 @@ class SnapshotArray {
  * var param_2 = obj.snap()
  * var param_3 = obj.get(index,snap_id)
  */
-[
-    { 0: 15, 1: 15 }
-]
