@@ -27,12 +27,14 @@ function minCost(nums: number[], cost: number[]): number {
     
     let res = totalCost
     
-    // then with nums[i]
+    // then from nums[1] to nums[i]
     for (let i = 1; i < n; i++) {
         const gap = numsCost[i].num - numsCost[i - 1].num
+        const prefix = prefixCosts[i - 1]
+        const suffix = prefixCosts[n - 1] - prefixCosts[i - 1]
         
-        totalCost += prefixCosts[i - 1] * gap
-        totalCost -= (prefixCosts[n - 1] - prefixCosts[i - 1]) * gap
+        totalCost += prefix * gap // green space will increase, leading to cost increase
+        totalCost -= suffix * gap // red space will decrease, leading to cost decrease
         res = Math.min(res, totalCost)
     }
     
