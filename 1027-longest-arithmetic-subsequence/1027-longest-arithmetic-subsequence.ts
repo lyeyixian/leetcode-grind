@@ -1,6 +1,6 @@
 function longestArithSeqLength(nums: number[]): number {
     const n = nums.length
-    const dp = {}
+    const dp = {} // dp[i][diff] --> max length of subsequence that ends at i with common difference of diff
     let max = 0
     
     for (let i = 0; i < n; i++) {
